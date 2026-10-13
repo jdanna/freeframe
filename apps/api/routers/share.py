@@ -332,6 +332,8 @@ def _build_share_validate_response(
         created_by_name=created_by_name,
         viewer_name=current_user.name if current_user else None,
         viewer_email=current_user.email if current_user else None,
+        viewer_avatar_url=current_user.avatar_url if current_user else None,
+        viewer_avatar_color=current_user.avatar_color if current_user else None,
         asset=asset_data,
         branding=branding_data,
         share_session=session_id,

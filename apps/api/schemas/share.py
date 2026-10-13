@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 import uuid
 from datetime import datetime
 from typing import Optional, Literal
@@ -92,9 +92,20 @@ class ShareLinkValidateResponse(BaseModel):
     created_by_name: Optional[str] = None
     viewer_name: Optional[str] = None  # Logged-in user's name (if authenticated)
     viewer_email: Optional[str] = None  # Logged-in user's email (if authenticated)
+    viewer_avatar_url: Optional[str] = None  # Logged-in user's picture, presigned below
+    viewer_avatar_color: Optional[str] = None  # Logged-in user's circle colour
     asset: Optional[dict] = None  # Full asset details for asset shares
     branding: Optional[dict] = None  # Project branding info
     share_session: Optional[str] = None  # Session token for password-protected links
+
+    @field_validator("viewer_avatar_url", mode="after")
+    @classmethod
+    def resolve_viewer_avatar_url(cls, v: Optional[str]) -> Optional[str]:
+        # The column holds an S3 key; every other user response presigns it.
+        if v and not v.startswith("http"):
+            from ..services import s3_service
+            return s3_service.generate_presigned_get_url(v)
+        return v
 
 
 class ShareVerifyRequest(BaseModel):

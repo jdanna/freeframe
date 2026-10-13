@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **One migration** adds `users.avatar_color`. Everyone starts with no color, which looks the same as before. (by @jdanna)
 
 ### Added
-- **Profile pictures.** Upload, replace or remove one under Settings → Profile. The picture is cropped to a square and scaled down to 256px in the browser before it's uploaded, so a phone photo doesn't become a multi-megabyte download on every comment. It shows wherever you appear: comments and replies (including on share links), timeline comment markers, the compare view, approvals, assignees, project members, the sidebar and Admin → Users. Comments and markers used to show initials only, even for someone who had a picture. (by @jdanna)
+- **Profile pictures.** Upload, replace or remove one under Settings → Profile. The picture is cropped to a square and scaled down to 256px in the browser before it's uploaded, so a phone photo doesn't become a multi-megabyte download on every comment. It shows wherever you appear: comments and replies (including on share links), timeline comment markers, the compare view, approvals, assignees, project members, the sidebar, Admin → Users, and the top bar of a folder share link you open while signed in. Comments and markers used to show initials only, even for someone who had a picture. (by @jdanna)
 - **A circle color for people without a picture.** It's set under Settings → Profile, next to the picture, and replaces the default color behind your initials everywhere they're shown. Reset goes back to the default. (by @jdanna)
 
 ### Security
