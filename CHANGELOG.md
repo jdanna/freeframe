@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Upgrade notes
+- **One migration** adds `users.avatar_color`. Everyone starts with no color, which looks the same as before. (by @jdanna)
+
+### Added
+- **Profile pictures.** Upload, replace or remove one under Settings → Profile. The picture is cropped to a square and scaled down to 256px in the browser before it's uploaded, so a phone photo doesn't become a multi-megabyte download on every comment. It shows wherever you appear: comments and replies (including on share links), timeline comment markers, the compare view, approvals, assignees, project members, the sidebar and Admin → Users. Comments and markers used to show initials only, even for someone who had a picture. (by @jdanna)
+- **A circle color for people without a picture.** It's set under Settings → Profile, next to the picture, and replaces the default color behind your initials everywhere they're shown. Reset goes back to the default. (by @jdanna)
+
+### Security
+- **`PATCH /users/{id}` no longer accepts `avatar_url`.** The field holds an S3 key that every user response turns into a signed download link, and this endpoint stored whatever it was sent. A signed-in user could set it to the key of any object in the bucket, such as another project's original upload, and get a working download link back from their own profile. A picture can now only be set through the upload confirm step, which accepts keys under the caller's own `avatars/` prefix, checks the object exists and is under 2 MB, and the upload step now signs only PNG, JPEG and WEBP. The web app never sent the field, so nothing in it changes. A client that still sends it gets a 200 and the field is ignored. (by @jdanna)
+
 ## [1.17.0] - 2026-10-12
 
 Includes the fixes for two security advisories about the live-update stream: [GHSA-mq5v-rvfx-6mmh](https://github.com/Techiebutler/freeframe/security/advisories/GHSA-mq5v-rvfx-6mmh) and [GHSA-85cc-6p7r-ppc4](https://github.com/Techiebutler/freeframe/security/advisories/GHSA-85cc-6p7r-ppc4). Upgrading is recommended.

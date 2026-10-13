@@ -87,6 +87,7 @@ class AuthorInfo(BaseModel):
     id: uuid.UUID
     name: str
     avatar_url: Optional[str] = None
+    avatar_color: Optional[str] = None
 
     @field_validator("avatar_url", mode="after")
     @classmethod
