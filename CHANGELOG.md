@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Right-click menus on projects, assets, folders and share links.** Right-click (or long-press on a touch screen) opens the same menu as the item's ⋯ button: on project cards and rows, asset cards and rows, folders in the grid, the list and the sidebar tree, and share links in the sidebar and the Share Links table. Right-clicking an item that is one of several selected opens a menu for the whole selection, with the selection bar's Create Share Link, Download, Move to and Delete. (by @jdanna)
+- **Comment counts on project thumbnails.** Assets in the project grid show how many comments their latest version has, with the same badge as a share link's grid, bottom-left on the thumbnail. Replies count, and internal comments do too, as the comment panel shows them to project members. The project asset list adds `comment_count` to each asset. (by @jdanna)
 
 ### Changed
 - **One folder menu everywhere.** A folder's menu is the same in the sidebar tree, the grid and the list: Create Share Link, New Subfolder, Rename, Delete. The tree gains Create Share Link, and the grid and list gain New Subfolder. (by @jdanna)
